@@ -304,19 +304,19 @@
 /obj/machinery/alarm/update_icon()
 	if(buildstage == 0)//air alarm on a wall
 		icon_state = "alarm_b0"
-		set_light(0)
+		kill_light()
 		return
 	if(buildstage == 1)//air alar witch circuit
 		icon_state = "alarm_b1"
-		set_light(0)
+		kill_light()
 		return
 	if(wiresexposed)//air alarm witch wire
 		icon_state = "alarmx"
-		set_light(0)
+		kill_light()
 		return
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
-		set_light(0)
+		kill_light()
 		return
 
 

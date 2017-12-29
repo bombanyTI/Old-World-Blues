@@ -250,8 +250,8 @@
 						if("helmet")
 							M << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
 							M.update_inv_head()
-							if(helmet)
-								helmet.update_light(wearer)
+//							if(helmet)
+//								helmet.update_light(wearer)
 
 					//sealed pieces become airtight, protecting against diseases
 					if (!seal_target)
@@ -623,8 +623,8 @@
 				else
 					H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 
-	if(piece == "helmet" && helmet)
-		helmet.update_light(H)
+//	if(piece == "helmet" && helmet)
+//		helmet.update_light(H)
 
 /obj/item/weapon/rig/proc/deploy(mob/M,var/sealed)
 
