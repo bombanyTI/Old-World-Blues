@@ -9,6 +9,6 @@
 /datum/controller/process/disease/doWork()
 	updateQueueInstance.init(active_diseases, "process")
 	updateQueueInstance.Run()
-
+/*
 /datum/controller/process/disease/getStatName()
-	return ..()+"([active_diseases.len])"
+	return ..()+"([active_diseases.len])"*/

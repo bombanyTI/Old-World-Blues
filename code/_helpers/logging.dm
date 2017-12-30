@@ -8,6 +8,8 @@
 
 /var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
+/proc/log_to_dd(text)
+		world.log << "[text]" //this comes before the config check because it can't possibly runtime
 
 /proc/error(msg)
 	world.log << "## ERROR: [msg][log_end]"

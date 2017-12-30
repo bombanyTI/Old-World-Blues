@@ -11,6 +11,9 @@ var/global/datum/controller/processScheduler/processScheduler
 	// Processes that are idle
 	var/tmp/datum/controller/process/list/idle = new
 
+	// Process total run time
+	var/tmp/datum/controller/process/list/total_run_time = new
+
 	// Processes that are queued to run
 	var/tmp/datum/controller/process/list/queued = new
 
@@ -35,8 +38,25 @@ var/global/datum/controller/processScheduler/processScheduler
 	// Controls whether the scheduler is running or not
 	var/tmp/isRunning = 0
 
+	var/tmp/currentTick = 0
+
+	var/tmp/timeAllowance = 0
+
+	var/tmp/cpuAverage = 0
+
+	var/tmp/timeAllowanceMax = 0
+
 	// Setup for these processes will be deferred until all the other processes are set up.
 	var/tmp/list/deferredSetupList = new
+
+/datum/controller/processScheduler/New()
+	..()
+	// When the process scheduler is first new'd, tick_lag may be wrong, so these
+	//  get re-initialized when the process scheduler is started.
+	// (These are kept here for any processes that decide to process before round start)
+	scheduler_sleep_interval = world.tick_lag
+	timeAllowance = world.tick_lag * 0.5
+	timeAllowanceMax = world.tick_lag
 
 /**
  * deferSetupFor
@@ -70,7 +90,13 @@ var/global/datum/controller/processScheduler/processScheduler
 		process()
 
 /datum/controller/processScheduler/proc/process()
+	updateCurrentTickData()
+
+	for(var/i=world.tick_lag,i<world.tick_lag*50,i+=world.tick_lag)
+		spawn(i) updateCurrentTickData()
 	while(isRunning)
+		// Hopefully spawning this for 50 ticks in the future will make it the first thing in the queue.
+		spawn(world.tick_lag*50) updateCurrentTickData()
 		checkRunningProcesses()
 		queueProcesses()
 		runQueuedProcesses()
@@ -78,6 +104,24 @@ var/global/datum/controller/processScheduler/processScheduler
 
 /datum/controller/processScheduler/proc/stop()
 	isRunning = 0
+
+/datum/controller/processScheduler/proc/getProcessHighestRunTime(var/datum/controller/process/process)
+	return highest_run_time[process]
+
+/datum/controller/processScheduler/proc/updateTimeAllowance()
+	// Time allowance goes down linearly with world.cpu.
+	var/tmp/error = cpuAverage - 100
+	var/tmp/timeAllowanceDelta = SIMPLE_SIGN(error) * -0.5 * world.tick_lag * max(0, 0.001 * abs(error))
+
+	//timeAllowance = world.tick_lag * min(1, 0.5 * ((200/max(1,cpuAverage)) - 1))
+	timeAllowance = min(timeAllowanceMax, max(0, timeAllowance + timeAllowanceDelta))
+
+/datum/controller/processScheduler/proc/updateCurrentTickData()
+	if (world.time > currentTick)
+		// New tick!
+		currentTick = world.time
+		updateTimeAllowance()
+		cpuAverage = (world.cpu + cpuAverage + cpuAverage) / 3
 
 /datum/controller/processScheduler/proc/checkRunningProcesses()
 	for(var/datum/controller/process/p in running)
@@ -133,6 +177,8 @@ var/global/datum/controller/processScheduler/processScheduler
 	last_twenty_run_times[process] = list()
 	highest_run_time.Add(process)
 	highest_run_time[process] = 0
+	total_run_time.Add(process)
+	total_run_time[process] = 0
 
 	// init starts and stops record starts
 	recordStart(process, 0)
@@ -308,6 +354,13 @@ var/global/datum/controller/processScheduler/processScheduler
 	if (hasProcess(processName))
 		var/datum/controller/process/process = nameToProcessMap[processName]
 		process.disable()
+
+/datum/controller/processScheduler/proc/getCurrentTickElapsedTime()
+	if (world.time > currentTick)
+		updateCurrentTickData()
+		return 0
+	else
+		return TimeOfTick
 
 /datum/controller/processScheduler/proc/getProcess(var/name)
 	return nameToProcessMap[name]

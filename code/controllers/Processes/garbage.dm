@@ -78,10 +78,10 @@ var/list/delayed_garbage = list()
 	A.gcDestroyed = world.time
 	destroyed -= "\ref[A]" // Removing any previous references that were GC'd so that the current object will be at the end of the list.
 	destroyed["\ref[A]"] = world.time
-
+/*
 /datum/controller/process/garbage_collector/getStatName()
 	return ..()+"([garbage_collector.destroyed.len]/[garbage_collector.dels]/[garbage_collector.hard_dels])"
-
+*/
 // Tests if an atom has been deleted.
 /proc/deleted(atom/A)
 	return !A || !isnull(A.gcDestroyed)

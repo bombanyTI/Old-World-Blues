@@ -8,6 +8,12 @@
 #define ENVIRON 3
 #define TOTAL   4 // For total power used only.
 
+#define KILOWATTS *1000
+#define MEGAWATTS *1000000
+#define GIGAWATTS *1000000000
+
+#define MACHINERY_TICKRATE 2		// Tick rate for machinery in seconds. As it affects CELLRATE calculation it is kept as define here
+
 // Bitflags for machine stat variable.
 #define BROKEN   0x1
 #define NOPOWER  0x2

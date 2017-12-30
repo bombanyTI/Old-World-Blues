@@ -12,6 +12,6 @@
 		var/mob/M = last_object
 		if(istype(M) && isnull(M.gcDestroyed))
 			M.Life()
-
+/*
 /datum/controller/process/mob/getStatName()
-	return ..()+"([mob_list.len])"
+	return ..()+"([mob_list.len])"*/

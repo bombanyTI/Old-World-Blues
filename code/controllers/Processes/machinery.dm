@@ -2,7 +2,8 @@
 
 /datum/controller/process/machinery/setup()
 	name = "machinery"
-	schedule_interval = 20 // every 2 seconds
+	schedule_interval = MACHINERY_TICKRATE SECONDS // See code/__defines/machinery.dm for definition of MACHINERY_TICKRATE.
+	start_delay = 12
 
 /datum/controller/process/machinery/doWork()
 	internal_sort()
@@ -19,7 +20,7 @@
 /datum/controller/process/machinery/proc/internal_process_machinery()
 	for(last_object in machines)
 		var/obj/machinery/M = last_object
-		if(M && !M.gcDestroyed)
+		if(M && !deleted(M))
 			if(M.process() == PROCESS_KILL)
 				//M.inMachineList = 0 We don't use this debugging function
 				machines.Remove(M)
@@ -28,14 +29,14 @@
 			if(M && M.use_power)
 				M.auto_use_power()
 
-		scheck()
+		SCHECK
 
 /datum/controller/process/machinery/proc/internal_process_power()
 	for(last_object in powernets)
 		var/datum/powernet/powerNetwork = last_object
-		if(istype(powerNetwork) && !powerNetwork.disposed)
+		if(istype(powerNetwork) && !deleted(powerNetwork))
 			powerNetwork.reset()
-			scheck()
+			SCHECK
 			continue
 
 		powernets.Remove(powerNetwork)
@@ -46,17 +47,21 @@
 		var/obj/item/I = last_object
 		if(!I.pwr_drain()) // 0 = Process Kill, remove from processing list.
 			processing_power_items.Remove(I)
-		scheck()
+		SCHECK
 
 /datum/controller/process/machinery/proc/internal_process_pipenets()
 	for(last_object in pipe_networks)
 		var/datum/pipe_network/pipeNetwork = last_object
-		if(istype(pipeNetwork) && !pipeNetwork.disposed)
+		if(istype(pipeNetwork) && !deleted(pipeNetwork))
 			pipeNetwork.process()
-			scheck()
+			SCHECK
 			continue
 
 		pipe_networks.Remove(pipeNetwork)
 
-/datum/controller/process/machinery/getStatName()
-	return ..()+"(MCH:[machines.len] PWR:[powernets.len] PIP:[pipe_networks.len])"
+/datum/controller/process/machinery/statProcess()
+	..()
+	stat(null, "[machines.len] machine\s")
+	stat(null, "[powernets.len] powernet\s")
+	stat(null, "[pipe_networks.len] pipenet\s")
+	stat(null, "[processing_power_items.len] power item\s")

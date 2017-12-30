@@ -19,6 +19,7 @@ var/global/list/object_profiling = list()
 	if(updateQueueInstance)
 		updateQueueInstance.init(processing_objects, "process")
 		updateQueueInstance.Run()
-
+/*
 /datum/controller/process/obj/getStatName()
 	return ..()+"([processing_objects.len])"
+*/
