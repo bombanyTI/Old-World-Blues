@@ -10,7 +10,7 @@
 /datum/controller/process/mob/doWork()
 	for(last_object in mob_list)
 		var/mob/M = last_object
-		if(istype(M) && isnull(M.gcDestroyed))
+		if(istype(M) && !QDELETED(M))
 			M.Life()
 /*
 /datum/controller/process/mob/getStatName()

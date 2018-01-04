@@ -5,11 +5,20 @@
 // admins that don't use notepad++ will get logs that are one big line if the system is Linux
 // and they are using notepad.  This solves it by adding CR to every line ending in the logs.
 // ascii character 13 = CR
+var/runtime_diary = null
 
 /var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 /proc/log_to_dd(text)
 		world.log << "[text]" //this comes before the config check because it can't possibly runtime
+
+//This replaces world.log so it displays both in DD and the file
+/proc/log_world(text)
+	if(config && config.log_runtime)
+		to_world_log(runtime_diary)
+		to_world_log(text)
+	to_world_log(null)
+	to_world_log(text)
 
 /proc/error(msg)
 	world.log << "## ERROR: [msg][log_end]"
@@ -160,5 +169,40 @@
 
 	return .
 
+/mob/get_log_info_line()
+	return ckey ? "[..()] ([ckey])" : ..()
+
+/proc/log_info_line(var/datum/d)
+	if(isnull(d))
+		return "*null*"
+	if(islist(d))
+		var/list/L = list()
+		for(var/e in d)
+			L += log_info_line(e)
+		return "\[[jointext(L, ", ")]\]" // We format the string ourselves, rather than use json_encode(), because it becomes difficult to read recursively escaped "
+	if(!istype(d))
+		return json_encode(d)
+	return d.get_log_info_line()
+
+/proc/log_error(text)
+	error(text)
+	to_debug_listeners(text, "ERROR")
+
+/proc/to_debug_listeners(text, prefix = "DEBUG")
+	return/*
+	for(var/client/C in admins)
+		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == PREF_SHOW)
+			to_chat(C, "[prefix]: [text]")*/
+
 /proc/key_name_admin(var/whom, var/include_name = 1)
 	return key_name(whom, 1, include_name)
+
+// Helper procs for building detailed log lines
+/datum/proc/get_log_info_line()
+	return "[src] ([type]) ([any2ref(src)])"
+
+/area/get_log_info_line()
+	return "[..()] ([isnum(z) ? "[x],[y],[z]" : "0,0,0"])"
+
+/turf/get_log_info_line()
+	return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"

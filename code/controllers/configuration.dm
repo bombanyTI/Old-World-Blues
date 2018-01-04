@@ -44,6 +44,8 @@ var/list/gamemode_cache = list()
 	var/protect_roles_from_antagonist = 0// If security and such can be traitor/cult/other
 	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
+	var/fps = 20
+	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/Ticklag = 0.5
 	var/Tickcomp = 0
 	var/list/resource_urls = null
@@ -313,6 +315,10 @@ var/list/gamemode_cache = list()
 
 				if ("log_runtime")
 					config.log_runtime = 1
+					var/newlog = file("data/logs/runtimes/runtime-[time2text(world.realtime, "YYYY-MM-DD")].log")
+					if(runtime_diary != newlog)
+						to_world_log("Now logging runtimes to data/logs/runtimes/runtime-[time2text(world.realtime, "YYYY-MM-DD")].log")
+						runtime_diary = newlog
 
 				if ("log_sql")
 					config.log_sql = 1
@@ -508,7 +514,12 @@ var/list/gamemode_cache = list()
 					Holiday = 1
 
 				if("ticklag")
-					Ticklag = text2num(value)
+					var/ticklag = text2num(value)
+					if(ticklag > 0)
+						fps = 10 / ticklag
+
+				if("tick_limit_mc_init")
+					tick_limit_mc_init = text2num(value)
 
 				if("allow_antag_hud")
 					config.antag_hud_allowed = 1

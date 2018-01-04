@@ -533,39 +533,51 @@
 /mob/Stat()
 	..()
 	. = (is_client_active(10 MINUTES))
+	if(!.)
+		return
 
-	if(.)
-		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
-			stat("Station Time", worldtime2text())
-			stat("Round Duration", round_duration())
+	if(statpanel("Status"))
+		if(ticker && ticker.current_state != GAME_STATE_PREGAME)
+			stat("Local Time", stationtime2text())
+			stat("Local Date", stationdate2text())
+			stat("Round Duration", roundduration2text())
+		if(client.holder || isobserver(client.mob))
+			stat("Location:", "([x], [y], [z]) [loc]")
 
-		if(client.holder)
-			if(statpanel("Status"))
-				stat("Location:", "([x], [y], [z]) [loc]")
-				stat("CPU:","[world.cpu]")
-				stat("Instances:","[world.contents.len]")
-/*
-			if(statpanel("Processes"))
-				if(processScheduler && processScheduler.getIsRunning())
-					for(var/datum/controller/process/P in processScheduler.processes)
-						stat(P.getStatName(), P.getTickTime())
-				else
-					stat("processScheduler is not running.")
-*/
-		if(listed_turf && client)
-			if(!TurfAdjacent(listed_turf))
-				listed_turf = null
+	if(client.holder)
+		if(statpanel("Processes") && processScheduler)
+			processScheduler.statProcesses()
+		if(statpanel("MC"))
+			stat("CPU:","[world.cpu]")
+			stat("Instances:","[world.contents.len]")
+			stat(null)
+			if(Master)
+				Master.stat_entry()
 			else
-				if(statpanel("Turf"))
-					stat("\icon[listed_turf]", listed_turf.name)
-					for(var/atom/A in listed_turf)
-						if(!A.mouse_opacity)
-							continue
-						if(A.invisibility > see_invisible)
-							continue
-						if(is_type_in_list(A, shouldnt_see))
-							continue
-						stat(A)
+				stat("Master Controller:", "ERROR")
+			if(Failsafe)
+				Failsafe.stat_entry()
+			else
+				stat("Failsafe Controller:", "ERROR")
+			if(Master)
+				stat(null)
+				for(var/datum/controller/subsystem/SS in Master.subsystems)
+					SS.stat_entry()
+
+	if(listed_turf && client)
+		if(!TurfAdjacent(listed_turf))
+			listed_turf = null
+		else
+			if(statpanel("Turf"))
+				stat(listed_turf)
+				for(var/atom/A in listed_turf)
+					if(!A.mouse_opacity)
+						continue
+					if(A.invisibility > see_invisible)
+						continue
+					if(is_type_in_list(A, shouldnt_see))
+						continue
+					stat(A)
 
 
 // facing verbs

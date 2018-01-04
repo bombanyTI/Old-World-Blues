@@ -30,20 +30,6 @@
 	var/tz =    input("Z? (default 1)")       as text|null
 	new map_datum(seed,tx,ty,tz)
 
-/client/proc/restart_controller(controller in list("Jobs","Supply"))
-	set category = "Debug"
-	set name = "Restart Controller"
-	set desc = "Restart one of the various periodic loop controllers for the game (be careful!)"
-
-	if(!holder)	return
-	usr = null
-	src = null
-	switch(controller)
-		if("Supply")
-			supply_controller.process()
-	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
-	return
-
 /client/proc/debug_antagonist_template(antag_type in all_antag_types)
 	set category = "Debug"
 	set name = "Debug Antagonist"
@@ -65,8 +51,6 @@
 			debug_variables(master_controller)
 		if("Ticker")
 			debug_variables(ticker)
-		if("Ticker Process")
-			debug_variables(tickerProcess)
 		if("Air")
 			debug_variables(air_master)
 		if("Jobs")
@@ -95,8 +79,6 @@
 			debug_variables(event_manager)
 		if("Plants")
 			debug_variables(plant_controller)
-		if("Alarm")
-			debug_variables(alarm_manager)
 		if("Nano")
 			debug_variables(nanomanager)
 		if("Jobs")

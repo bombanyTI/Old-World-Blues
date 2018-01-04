@@ -485,12 +485,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/cmp_numeric_dsc(a,b)
 	return b - a
 
-/proc/cmp_numeric_asc(a,b)
-	return a - b
-
-/proc/cmp_text_asc(a,b)
-	return sorttext(b,a)
-
 	//These are macros used to reduce on proc calls
 #define fetchElement(L, i) (associative) ? L[L[i]] : L[i]
 

@@ -11,6 +11,7 @@
 #define DAYS *864000
 
 #define TimeOfGame (get_game_time())
+#define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
 #define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
 /proc/get_game_time()
 	var/global/time_offset = 0
@@ -97,3 +98,42 @@ proc/round_duration()
 /proc/process_schedule_interval(var/process_name)
 	var/datum/controller/process/process = processScheduler.getProcess(process_name)
 	return process.schedule_interval
+
+/var/midnight_rollovers = 0
+/var/rollovercheck_last_timeofday = 0
+
+/proc/update_midnight_rollover()
+	if (world.timeofday < rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+		return midnight_rollovers++
+	return midnight_rollovers
+
+//Increases delay as the server gets more overloaded,
+//as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
+#define DELTA_CALC max(((max(world.tick_usage, world.cpu) / 100) * max(Master.sleep_delta,1)), 1)
+
+/proc/stoplag()
+	. = 0
+	var/i = 1
+	do
+		. += round(i*DELTA_CALC)
+		sleep(i*world.tick_lag*DELTA_CALC)
+		i *= 2
+	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, CURRENT_TICKLIMIT))
+
+/proc/roundduration2text()
+	if(!round_start_time)
+		return "00:00"
+	if(last_round_duration && world.time < next_duration_update)
+		return last_round_duration
+
+	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
+	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
+	var/mins = round((mills % 36000) / 600)
+	var/hours = round(mills / 36000)
+
+	mins = mins < 10 ? add_zero(mins, 1) : mins
+	hours = hours < 10 ? add_zero(hours, 1) : hours
+
+	last_round_duration = "[hours]:[mins]"
+	next_duration_update = world.time + 1 MINUTES
+	return last_round_duration

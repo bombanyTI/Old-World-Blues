@@ -355,6 +355,15 @@ var/global/datum/controller/processScheduler/processScheduler
 		var/datum/controller/process/process = nameToProcessMap[processName]
 		process.disable()
 
+/datum/controller/processScheduler/proc/statProcesses()
+	if(!isRunning)
+		stat("Processes", "Scheduler not running")
+		return
+	stat("Processes", "[processes.len] (R [running.len] / Q [queued.len] / I [idle.len])")
+	stat(null, "[round(cpuAverage, 0.1)] CPU, [round(timeAllowance, 0.1)/10] TA")
+	for(var/datum/controller/process/p in processes)
+		p.statProcess()
+
 /datum/controller/processScheduler/proc/getCurrentTickElapsedTime()
 	if (world.time > currentTick)
 		updateCurrentTickData()
