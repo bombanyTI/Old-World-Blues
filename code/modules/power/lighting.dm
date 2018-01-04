@@ -153,8 +153,8 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
 	var/on_gs = 0
-	var/brightness_range = 8	// luminosity when on, also used in power calculation
-	var/brightness_power = 3
+	var/brightness_range = 6	// luminosity when on, also used in power calculation
+	var/brightness_power = 5
 	var/brightness_color = null
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0

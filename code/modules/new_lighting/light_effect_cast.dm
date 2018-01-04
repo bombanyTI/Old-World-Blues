@@ -152,8 +152,10 @@ var/light_power_multiplier = 5
 	var/image/I = image(shadowicon)
 
 	if(xy_swap)
+		x_offset = target_turf.x
 		I.icon_state = "[abs(y_offset)]_[abs(x_offset)]"
 	else
+		y_offset = target_turf.y
 		I.icon_state = "[abs(x_offset)]_[abs(y_offset)]"
 
 
@@ -216,8 +218,8 @@ var/light_power_multiplier = 5
 
 	I = image('icons/planar_lighting/wall_lighting.dmi')
 	I.icon_state = "[blocking_dirs]-[targ_dir]"
-	I.pixel_x = (world.icon_size * light_range) + (x_offset * world.icon_size)
-	I.pixel_y = (world.icon_size * light_range) + (y_offset * world.icon_size)
+	I.pixel_x = (world.icon_size * light_range) - (x_offset  * world.icon_size)
+	I.pixel_y = (world.icon_size * light_range) - (y_offset  * world.icon_size)
 	I.layer = 3
 
 	temp_appearance += I

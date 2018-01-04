@@ -1132,6 +1132,8 @@
 		if(hud_used)
 			qdel(hud_used)
 		hud_used = new /datum/hud(src)
+		client.screen |= master_plane
+		client.screen |= dark_plane
 
 	if(species)
 		return 1
