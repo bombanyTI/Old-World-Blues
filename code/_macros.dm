@@ -84,3 +84,5 @@
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 
 #define to_world_log(message)                               world.log << message
+
+#define QDEL_NULL(x) if(x) { qdel(x) ; x = null }

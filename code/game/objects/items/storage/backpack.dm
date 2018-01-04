@@ -43,12 +43,16 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
+	New()
+		..()
+		return
+
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/storage/backpack/holding))
 			user << "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>"
 			qdel(W)
-			return
-		..()
+			return 1
+		return ..()
 
 	//Please don't clutter the parent storage item with stupid hacks.
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
