@@ -104,13 +104,13 @@
 /proc/make_view_variables_var_list(datum/D)
 	. = ""
 	var/list/variables = list()
-	for(var/x in D.vars)
+	for(var/x in D.get_variables())
 		if(x in view_variables_hide_vars)
 			continue
 		variables += x
 	variables = sortList(variables)
 	for(var/x in variables)
-		. += make_view_variables_var_entry(D, x, D.vars[x])
+		. += make_view_variables_var_entry(D, x, D.get_variable_value(x))
 
 /proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
 	var/ecm = null
@@ -118,11 +118,7 @@
 	var/extra = null
 
 	if(D)
-		ecm = {"
-			(<a href='?_src_=vars;datumedit=\ref[D];varnameedit=[varname]'>E</a>)
-			(<a href='?_src_=vars;datumchange=\ref[D];varnamechange=[varname]'>C</a>)
-			(<a href='?_src_=vars;datummass=\ref[D];varnamemass=[varname]'>M</a>)
-			"}
+		ecm = D.make_view_variables_variable_entry(varname, value)
 
 	if(isnull(value))
 		vtext = "null"

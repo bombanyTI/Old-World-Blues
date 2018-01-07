@@ -27,7 +27,7 @@
 
 	var/list/locked = list("vars", "key", "ckey", "client")
 
-	for(var/p in forbidden_varedit_object_types)
+	for(var/p in forbidden_varedit_object_types())
 		if( istype(O,p) )
 			usr << "\red It is forbidden to edit this object's variables."
 			return
