@@ -960,6 +960,7 @@
 #include "code\modules\admin\view_variables\topic.dm"
 #include "code\modules\admin\view_variables\view_variables.dm"
 #include "code\modules\admin\view_variables\view_variables_global.dm"
+#include "code\modules\admin\view_variables\vv_set_handlers.dm"
 #include "code\modules\alarm\alarm.dm"
 #include "code\modules\alarm\alarm_handler.dm"
 #include "code\modules\alarm\atmosphere_alarm.dm"
