@@ -158,7 +158,7 @@ datum/controller/vote
 					if(isnull(.) || . == "None")
 						antag_add_failed = 1
 					else
-						additional_antag_types |= antag_names_to_ids[.]
+						additional_antag_types |= antag_names_to_ids()[.]
 
 		if(mode == "gamemode") //fire this even if the vote fails.
 			if(!going)
@@ -226,8 +226,8 @@ datum/controller/vote
 				if("add_antagonist")
 					if(!config.allow_extra_antags || ticker.current_state >= 2)
 						return 0
-					for(var/antag_type in all_antag_types)
-						var/datum/antagonist/antag = all_antag_types[antag_type]
+					for(var/antag_type in all_antag_types())
+						var/datum/antagonist/antag = all_antag_types()[antag_type]
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
 							choices.Add(antag.role_text)
 					choices.Add("None")

@@ -138,7 +138,7 @@
 	set name = "Toggle SpecialRole Candidacy"
 	set category = "Preferences"
 	set desc = "Toggles which special roles you would like to be a candidate for, during events."
-	var/role = input("Select role for toggle") as null|anything in (special_roles + all_antag_types)
+	var/role = input("Select role for toggle") as null|anything in (special_roles + all_antag_types())
 	if(!role)
 		return
 	prefs.special_toggles ^= role

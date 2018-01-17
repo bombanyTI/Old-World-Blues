@@ -407,6 +407,7 @@
 		body += formatJobGroup(M, "Non-human Positions", "ccffcc", "nonhumandept", nonhuman_positions + "pAI" + "Antag HUD")
 	//Antagonist (Orange)
 		var/jobban_list = list()
+		var/list/all_antag_types = all_antag_types()
 		for(var/antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[antag_type]
 			if(!antag || !antag.bantype)

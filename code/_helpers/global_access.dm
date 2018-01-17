@@ -63,6 +63,8 @@
 			return global.TICKS_IN_SECOND;
 		if("WALLITEMS")
 			return global.WALLITEMS;
+		if("_all_globals")
+			return global._all_globals;
 		if("_preloader")
 			return global._preloader;
 		if("account_hack_attempted")
@@ -375,6 +377,8 @@
 			return global.directory;
 		if("dna_activity_bounds")
 			return global.dna_activity_bounds;
+		if("dna_genes")
+			return global.dna_genes;
 		if("donations")
 			return global.donations;
 		if("donator_icons")
@@ -611,6 +615,8 @@
 			return global.log_end;
 		if("loyalists")
 			return global.loyalists;
+		if("machinery_sort_required")
+			return global.machinery_sort_required;
 		if("machines")
 			return global.machines;
 		if("magazine_icondata_keys")
@@ -991,6 +997,8 @@
 			return global.sqlpass;
 		if("sqlport")
 			return global.sqlport;
+		if("start_state")
+			return global.start_state;
 		if("station_account")
 			return global.station_account;
 		if("station_date")
@@ -1147,7 +1155,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1206,8 +1214,14 @@
 			global.PDAs=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
+		if("TICKS_IN_DAY")
+			global.TICKS_IN_DAY=newval;
+		if("TICKS_IN_SECOND")
+			global.TICKS_IN_SECOND=newval;
 		if("WALLITEMS")
 			global.WALLITEMS=newval;
+		if("_all_globals")
+			global._all_globals=newval;
 		if("_preloader")
 			global._preloader=newval;
 		if("account_hack_attempted")
@@ -1352,6 +1366,8 @@
 			global.awaydestinations=newval;
 		if("backbaglist")
 			global.backbaglist=newval;
+		if("base_law_type")
+			global.base_law_type=newval;
 		if("base_miss_chance")
 			global.base_miss_chance=newval;
 		if("blackbox")
@@ -1518,6 +1534,8 @@
 			global.directory=newval;
 		if("dna_activity_bounds")
 			global.dna_activity_bounds=newval;
+		if("dna_genes")
+			global.dna_genes=newval;
 		if("donations")
 			global.donations=newval;
 		if("donator_icons")
@@ -1754,6 +1772,8 @@
 			global.log_end=newval;
 		if("loyalists")
 			global.loyalists=newval;
+		if("machinery_sort_required")
+			global.machinery_sort_required=newval;
 		if("machines")
 			global.machines=newval;
 		if("magazine_icondata_keys")
@@ -2134,6 +2154,8 @@
 			global.sqlpass=newval;
 		if("sqlport")
 			global.sqlport=newval;
+		if("start_state")
+			global.start_state=newval;
 		if("station_account")
 			global.station_account=newval;
 		if("station_date")
@@ -2290,7 +2312,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2323,6 +2345,7 @@
 	"TICKS_IN_DAY",
 	"TICKS_IN_SECOND",
 	"WALLITEMS",
+	"_all_globals",
 	"_preloader",
 	"account_hack_attempted",
 	"acting_rank_prefixes",
@@ -2598,6 +2621,7 @@
 	"lobby_image",
 	"log_end",
 	"loyalists",
+	"machinery_sort_required",
 	"machines",
 	"magazine_icondata_keys",
 	"magazine_icondata_states",

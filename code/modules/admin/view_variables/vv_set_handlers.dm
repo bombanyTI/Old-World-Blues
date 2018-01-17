@@ -1,7 +1,5 @@
 /decl/vv_set_handler
-	var/handled_type
 	var/predicates
-	var/list/handled_vars
 
 /decl/vv_set_handler/proc/can_handle_set_var(var/datum/O, variable, var_value, client)
 	if(!istype(O, handled_type))
@@ -17,7 +15,7 @@
 				return FALSE
 	return TRUE
 
-/decl/vv_set_handler/proc/handle_set_var(var/datum/O, variable, var_value, client)
+/decl/vv_set_handler/handle_set_var(var/datum/O, variable, var_value, client)
 	var/proc_to_call = handled_vars[variable]
 	if(proc_to_call)
 		call(O, proc_to_call)(var_value)

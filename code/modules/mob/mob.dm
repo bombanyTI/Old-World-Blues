@@ -108,6 +108,16 @@
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
+#define UNBUCKLED 0
+#define PARTIALLY_BUCKLED 1
+#define FULLY_BUCKLED 2
+/mob/proc/buckled()
+	// Preliminary work for a future buckle rewrite,
+	// where one might be fully restrained (like an elecrical chair), or merely secured (shuttle chair, keeping you safe but not otherwise restrained from acting)
+	if(!buckled)
+		return UNBUCKLED
+	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
+
 // Show a message to all mobs in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.
@@ -925,6 +935,32 @@ mob/proc/yank_out_object()
 			return ..(facing_dir)
 	else
 		return ..()
+
+/mob/proc/is_physically_disabled()
+	return incapacitated(INCAPACITATION_DISABLED)
+
+/mob/proc/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+
+	if ((incapacitation_flags & INCAPACITATION_STUNNED) && stunned)
+		return 1
+
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (weakened || resting || pinned.len))
+		return 1
+
+	if ((incapacitation_flags & INCAPACITATION_KNOCKOUT) && (stat || paralysis || sleeping || (status_flags & FAKEDEATH)))
+		return 1
+
+	if((incapacitation_flags & INCAPACITATION_RESTRAINED) && restrained())
+		return 1
+
+	if((incapacitation_flags & (INCAPACITATION_BUCKLED_PARTIALLY|INCAPACITATION_BUCKLED_FULLY)))
+		var/buckling = buckled()
+		if(buckling >= PARTIALLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_PARTIALLY))
+			return 1
+		if(buckling == FULLY_BUCKLED && (incapacitation_flags & INCAPACITATION_BUCKLED_FULLY))
+			return 1
+
+	return 0
 
 /mob/verb/northfaceperm()
 	set hidden = 1

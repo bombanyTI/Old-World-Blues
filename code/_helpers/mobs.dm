@@ -172,3 +172,75 @@ proc/RoundHealth(health)
 
 	if (progbar)
 		qdel(progbar)
+
+/proc/able_mobs_in_oview(var/origin)
+	var/list/mobs = list()
+	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
+		if(!M.is_physically_disabled())
+			mobs += M
+	return mobs
+
+// Returns true if M was not already in the dead mob list
+/mob/proc/switch_from_living_to_dead_mob_list()
+	remove_from_living_mob_list()
+	. = add_to_dead_mob_list()
+
+// Returns true if M was not already in the living mob list
+/mob/proc/switch_from_dead_to_living_mob_list()
+	remove_from_dead_mob_list()
+	. = add_to_living_mob_list()
+
+// Returns true if the mob was in neither the dead or living list
+/mob/proc/add_to_living_mob_list()
+	return FALSE
+/mob/living/add_to_living_mob_list()
+	if((src in living_mob_list) || (src in dead_mob_list))
+		return FALSE
+	living_mob_list += src
+	return TRUE
+
+// Returns true if the mob was removed from the living list
+/mob/proc/remove_from_living_mob_list()
+	return living_mob_list.Remove(src)
+
+// Returns true if the mob was in neither the dead or living list
+/mob/proc/add_to_dead_mob_list()
+	return FALSE
+/mob/living/add_to_dead_mob_list()
+	if((src in living_mob_list) || (src in dead_mob_list))
+		return FALSE
+	dead_mob_list += src
+	return TRUE
+
+// Returns true if the mob was removed form the dead list
+/mob/proc/remove_from_dead_mob_list()
+	return dead_mob_list.Remove(src)
+
+//Find a dead mob with a brain and client.
+/proc/find_dead_player(var/find_key, var/include_observers = 0)
+	if(isnull(find_key))
+		return
+
+	var/mob/selected = null
+
+	if(include_observers)
+		for(var/mob/M in player_list)
+			if((M.stat != DEAD) || (!M.client))
+				continue
+			if(M.ckey == find_key)
+				selected = M
+				break
+	else
+		for(var/mob/living/M in player_list)
+			//Dead people only thanks!
+			if((M.stat != DEAD) || (!M.client))
+				continue
+			//They need a brain!
+			if(istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(!H.has_brain())
+					continue
+			if(M.ckey == find_key)
+				selected = M
+				break
+	return selected

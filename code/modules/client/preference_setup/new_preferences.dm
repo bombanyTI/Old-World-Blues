@@ -697,6 +697,7 @@
 	if(jobban_isbanned(user, "Syndicate"))
 		dat += "<b>You are banned from antagonist roles.</b>"
 	else
+		var/list/all_antag_types = all_antag_types()
 		for (var/role in all_antag_types)
 			if(jobban_isbanned(user, role))
 				dat += "Be [role]: <font color=red><b> \[BANNED]</b></font><br>"
