@@ -67,20 +67,11 @@
 	handled_type = /atom
 	handled_vars = list("dir" = /atom/proc/set_dir)
 	predicates = list(/proc/is_dir_predicate)
-
+/*
 /decl/vv_set_handler/ghost_appearance_handler
-	handled_type = /mob/observer/ghost
-	handled_vars = list("appearance" = /mob/observer/ghost/proc/set_appearance)
+	handled_type = /mob/observer/dead
+	handled_vars = list("appearance" = /mob/observer/dead/proc/set_appearance)
 	predicates = list(/proc/is_atom_predicate)
-
-/decl/vv_set_handler/virtual_ability_handler
-	handled_type = /mob/observer/virtual
-	handled_vars = list("abilities")
-	predicates = list(/proc/is_num_predicate)
-
-/decl/vv_set_handler/virtual_ability_handler/handle_set_var(var/mob/observer/virtual/virtual, variable, var_value, client)
-	..()
-	virtual.update_icon()
 
 /decl/vv_set_handler/mob_see_invisible_handler
 	handled_type = /mob
@@ -105,8 +96,4 @@
 /decl/vv_set_handler/icon_state_handler
 	handled_type = /atom
 	handled_vars = list("icon_state" = /atom/proc/set_icon_state)
-
-/decl/vv_set_handler/invisibility_handler
-	handled_type = /atom
-	handled_vars = list("invisibility" = /atom/proc/set_invisibility)
-	predicates = list(/proc/is_num_predicate)
+*/

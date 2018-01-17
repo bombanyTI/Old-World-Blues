@@ -52,6 +52,8 @@
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
 
+#define isatom(A) istype(A, /atom)
+
 #define isdrone(A) istype(A, /mob/living/silicon/robot/drone)
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)

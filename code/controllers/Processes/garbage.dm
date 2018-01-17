@@ -1,3 +1,5 @@
+
+
 var/datum/controller/subsystem/garbage_collector/SSgarbage
 
 /datum/controller/subsystem/garbage_collector

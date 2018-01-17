@@ -16,6 +16,54 @@
 		</font>
 		"}
 
+
+// The following vars cannot be edited by anyone
+/datum/proc/VV_static()
+	return list("parent_type")
+
+/atom/VV_static()
+	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")
+
+/datum/admins/VV_static()
+	return vars
+
+// The following vars require R_DEBUG to edit
+/datum/proc/VV_locked()
+	return list("vars", "virus", "viruses", "cuffed")
+
+/mob/VV_locked()
+	return ..() + list("client")
+
+// The following vars require R_FUN|R_DEBUG to edit
+/datum/proc/VV_icon_edit_lock()
+	return list()
+
+/atom/VV_icon_edit_lock()
+	return ..() + list("icon", "icon_state", "overlays", "underlays")
+
+// The following vars require R_SPAWN|R_DEBUG to edit
+/datum/proc/VV_ckey_edit()
+	return list()
+
+/mob/VV_ckey_edit()
+	return list("key", "ckey")
+
+/datum/proc/may_edit_var(var/user, var/var_to_edit)
+	if(!user)
+		return FALSE
+	if(!(var_to_edit in vars))
+		to_chat(user, "<span class='warning'>\The [src] does not have a var '[var_to_edit]'</span>")
+		return FALSE
+	if(var_to_edit in VV_static())
+		return FALSE
+	if((var_to_edit in VV_locked()) && !check_rights(R_DEBUG, C = user))
+		return FALSE
+	if((var_to_edit in VV_ckey_edit()) && !check_rights(R_SPAWN|R_DEBUG, C = user))
+		return FALSE
+	if((var_to_edit in VV_icon_edit_lock()) && !check_rights(R_FUN|R_DEBUG, C = user))
+		return FALSE
+	return TRUE
+
 /mob/living/get_view_variables_header()
 	return {"
 		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>

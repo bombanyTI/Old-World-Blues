@@ -934,8 +934,8 @@ var/list/admin_verbs_mod = list(
 	set desc = "Add custom supply pack, it will be available in cargo"
 
 	if( !src.holder ) return
-	var/obj/structure/closet/MD = src.holder.marked_datum
-	if( src.holder.marked_datum==null || (!istype(MD)&&!istype(MD, /obj/structure/largecrate)) )
+	var/obj/structure/closet/MD = src.holder.marked_datum()
+	if( src.holder.marked_datum()==null || (!istype(MD)&&!istype(MD, /obj/structure/largecrate)) )
 		alert( "You must select any object with type \"/obj/structure/closet\" as \"Marked object\" ( VV-> mark object) before we can start", "Error", "Ok" )
 		return
 

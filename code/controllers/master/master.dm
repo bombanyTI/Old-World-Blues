@@ -1,4 +1,4 @@
-/**
+ /**
   * StonedMC
   *
   * Designed to properly split up a given tick among subsystems
@@ -130,8 +130,8 @@ var/CURRENT_TICKLIMIT = TICK_LIMIT_RUNNING
 
 	// Sort subsystems by init_order, so they initialize in the correct order.
 	sortTim(subsystems, /proc/cmp_subsystem_init)
-	var/start_timeofday = REALTIMEOFDAY
 
+	var/start_timeofday = REALTIMEOFDAY
 	// Initialize subsystems.
 	CURRENT_TICKLIMIT = config.tick_limit_mc_init
 	for (var/datum/controller/subsystem/SS in subsystems)

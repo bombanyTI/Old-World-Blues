@@ -212,7 +212,7 @@
 
 		src.cmd_admin_emp(A)
 		href_list["datumrefresh"] = href_list["emp"]
-
+/*
 	else if(href_list["mark_object"])
 		if(!check_rights(0))	return
 
@@ -221,9 +221,9 @@
 			usr << "This can only be done to instances of type /datum"
 			return
 
-		src.holder.marked_datum = D
+		src.holder.marked_datum() = D
 		href_list["datumrefresh"] = href_list["mark_object"]
-
+*/
 	else if(href_list["rotatedatum"])
 		if(!check_rights(0))	return
 

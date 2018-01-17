@@ -21,15 +21,6 @@
 	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
 		initialize()
 
-/*
-/atom/movable/Del()
-	if(isnull(gcDestroyed) && loc)
-		testing("GC: -- [type] was deleted via del() rather than qdel() --")
-
-		// stick a stack trace in the runtime logs
-		crash_with("GC: -- [type] was deleted via del() rather than qdel() --")
-*/
-
 /atom/movable/Destroy()
 	. = ..()
 	if(reagents)
