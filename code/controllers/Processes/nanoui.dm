@@ -7,7 +7,7 @@
 	updateQueueInstance = new
 
 /datum/controller/process/nanoui/doWork()
-	updateQueueInstance.init(nanomanager.processing_uis, "process")
+	updateQueueInstance.init(GLOB.nanomanager.processing_uis, "process")
 	updateQueueInstance.Run()
 /*
 /datum/controller/process/nanoui/getStatName()

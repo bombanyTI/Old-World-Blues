@@ -1898,6 +1898,9 @@ var/mob/dview/dview_mob = new
 /proc/crash_with(msg)
 	CRASH(msg)
 
+/proc/pass()
+	return
+
 //// Player-cap ////
 /proc/living_player_count()
 	var/living_player_count = 0

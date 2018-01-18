@@ -87,4 +87,6 @@
 
 #define to_world_log(message)                               world.log << message
 
+#define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
+
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
