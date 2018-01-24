@@ -41,16 +41,8 @@
 			return global.GlobalPool;
 		if("Holiday")
 			return global.Holiday;
-		if("MC_restart_clear")
-			return global.MC_restart_clear;
-		if("MC_restart_count")
-			return global.MC_restart_count;
-		if("MC_restart_timeout")
-			return global.MC_restart_timeout;
 		if("ManifestJSON")
 			return global.ManifestJSON;
-		if("Master")
-			return global.Master;
 		if("PDA_Manifest")
 			return global.PDA_Manifest;
 		if("PDAs")
@@ -63,8 +55,6 @@
 			return global.TICKS_IN_SECOND;
 		if("WALLITEMS")
 			return global.WALLITEMS;
-		if("_all_globals")
-			return global._all_globals;
 		if("_preloader")
 			return global._preloader;
 		if("account_hack_attempted")
@@ -143,10 +133,10 @@
 			return global.allCasters;
 		if("allConsoles")
 			return global.allConsoles;
-		if("all_antag_spawnpoints")
-			return global.all_antag_spawnpoints;
-		if("all_antag_types")
-			return global.all_antag_types;
+		if("all_antag_spawnpoints_")
+			return global.all_antag_spawnpoints_;
+		if("all_antag_types_")
+			return global.all_antag_types_;
 		if("all_areas")
 			return global.all_areas;
 		if("all_integrated_circuits")
@@ -181,8 +171,8 @@
 			return global.announced_news_types;
 		if("antag_add_failed")
 			return global.antag_add_failed;
-		if("antag_names_to_ids")
-			return global.antag_names_to_ids;
+		if("antag_names_to_ids_")
+			return global.antag_names_to_ids_;
 		if("ascii_esc")
 			return global.ascii_esc;
 		if("ascii_green")
@@ -893,6 +883,8 @@
 			return global.say_disabled;
 		if("scarySounds")
 			return global.scarySounds;
+		if("scheduler")
+			return global.scheduler;
 		if("science_positions")
 			return global.science_positions;
 		if("sec_hud_users")
@@ -1198,16 +1190,8 @@
 			global.GlobalPool=newval;
 		if("Holiday")
 			global.Holiday=newval;
-		if("MC_restart_clear")
-			global.MC_restart_clear=newval;
-		if("MC_restart_count")
-			global.MC_restart_count=newval;
-		if("MC_restart_timeout")
-			global.MC_restart_timeout=newval;
 		if("ManifestJSON")
 			global.ManifestJSON=newval;
-		if("Master")
-			global.Master=newval;
 		if("PDA_Manifest")
 			global.PDA_Manifest=newval;
 		if("PDAs")
@@ -1220,8 +1204,6 @@
 			global.TICKS_IN_SECOND=newval;
 		if("WALLITEMS")
 			global.WALLITEMS=newval;
-		if("_all_globals")
-			global._all_globals=newval;
 		if("_preloader")
 			global._preloader=newval;
 		if("account_hack_attempted")
@@ -1300,10 +1282,10 @@
 			global.allCasters=newval;
 		if("allConsoles")
 			global.allConsoles=newval;
-		if("all_antag_spawnpoints")
-			global.all_antag_spawnpoints=newval;
-		if("all_antag_types")
-			global.all_antag_types=newval;
+		if("all_antag_spawnpoints_")
+			global.all_antag_spawnpoints_=newval;
+		if("all_antag_types_")
+			global.all_antag_types_=newval;
 		if("all_areas")
 			global.all_areas=newval;
 		if("all_integrated_circuits")
@@ -1338,8 +1320,8 @@
 			global.announced_news_types=newval;
 		if("antag_add_failed")
 			global.antag_add_failed=newval;
-		if("antag_names_to_ids")
-			global.antag_names_to_ids=newval;
+		if("antag_names_to_ids_")
+			global.antag_names_to_ids_=newval;
 		if("ascii_esc")
 			global.ascii_esc=newval;
 		if("ascii_green")
@@ -2050,6 +2032,8 @@
 			global.say_disabled=newval;
 		if("scarySounds")
 			global.scarySounds=newval;
+		if("scheduler")
+			global.scheduler=newval;
 		if("science_positions")
 			global.science_positions=newval;
 		if("sec_hud_users")
@@ -2334,18 +2318,13 @@
 	"Failsafe",
 	"GlobalPool",
 	"Holiday",
-	"MC_restart_clear",
-	"MC_restart_count",
-	"MC_restart_timeout",
 	"ManifestJSON",
-	"Master",
 	"PDA_Manifest",
 	"PDAs",
 	"SSgarbage",
 	"TICKS_IN_DAY",
 	"TICKS_IN_SECOND",
 	"WALLITEMS",
-	"_all_globals",
 	"_preloader",
 	"account_hack_attempted",
 	"acting_rank_prefixes",
@@ -2385,8 +2364,8 @@
 	"alien_whitelist",
 	"allCasters",
 	"allConsoles",
-	"all_antag_spawnpoints",
-	"all_antag_types",
+	"all_antag_spawnpoints_",
+	"all_antag_types_",
 	"all_areas",
 	"all_integrated_circuits",
 	"all_languages",
@@ -2404,7 +2383,7 @@
 	"alldirs",
 	"announced_news_types",
 	"antag_add_failed",
-	"antag_names_to_ids",
+	"antag_names_to_ids_",
 	"ascii_esc",
 	"ascii_green",
 	"ascii_red",
@@ -2760,6 +2739,7 @@
 	"same_wires",
 	"say_disabled",
 	"scarySounds",
+	"scheduler",
 	"science_positions",
 	"sec_hud_users",
 	"secret_force_mode",

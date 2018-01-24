@@ -14,9 +14,7 @@
 //Master -> SSPreInit -> GLOB -> world -> config -> SSInit -> Failsafe
 //GOT IT MEMORIZED?
 
-GLOBAL_VAR_INIT(MC_restart_clear, 0)
-GLOBAL_VAR_INIT(MC_restart_timeout, 0)
-GLOBAL_VAR_INIT(MC_restart_count, 0)
+
 
 
 //current tick limit, assigned by the queue controller before running a subsystem.
