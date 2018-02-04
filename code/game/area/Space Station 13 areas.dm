@@ -2133,7 +2133,7 @@ area/crew_quarters/barman
 				mysound.status = SOUND_PAUSED | SOUND_UPDATE
 				Obj << mysound
 
-	proc/process()
+	process()
 		set background = 1
 
 		var/sound/S = null
@@ -2254,7 +2254,7 @@ var/list/the_station_areas = list (
 				mysound.status = SOUND_PAUSED | SOUND_UPDATE
 				Obj << mysound
 
-	proc/process()
+	process()
 		set background = 1
 
 		var/sound/S = null

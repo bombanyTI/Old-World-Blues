@@ -179,7 +179,7 @@
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, icon_panel)
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 		return
 
 	if(istype(O, /obj/item/device/multitool)||istype(O, /obj/item/weapon/wirecutters))
@@ -204,7 +204,7 @@
 				item_quants[O.name] = 1
 			user.visible_message(SPAN_NOTE("[user] has added \the [O] to \the [src]."), SPAN_NOTE("You add \the [O] to \the [src]."))
 
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 
 	else if(istype(O, /obj/item/storage/bag))
 		var/obj/item/storage/bag/P = O
@@ -227,7 +227,7 @@
 			if(P.contents.len > 0)
 				user << SPAN_NOTE("Some items are refused.")
 
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 	else
 		user << SPAN_NOTE("\The [src] smartly refuses [O].")
@@ -274,7 +274,7 @@
 	if(items.len > 0)
 		data["contents"] = items
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "smartfridge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -284,7 +284,7 @@
 	if(..()) return 0
 
 	var/mob/user = usr
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+	var/datum/nanoui/ui = SSnanoui.get_open_ui(user, src, "main")
 
 	src.add_fingerprint(user)
 
