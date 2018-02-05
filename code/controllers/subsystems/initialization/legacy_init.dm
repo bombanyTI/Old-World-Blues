@@ -13,7 +13,7 @@
 /datum/controller/subsystem/legacy_init/Initialize()
 	if (!job_master)
 		job_master = new /datum/controller/occupations()
-		job_master.SetupOccupations(setup_titles=1)
+		job_master.SetupOccupations()
 		job_master.LoadJobs("config/jobs.txt")
 		admin_notice("<span class='danger'>Job setup complete</span>", R_DEBUG)
 
@@ -83,12 +83,12 @@
 			CHECK_TICK
 
 	count = 0
-	admin_notice("<span class='danger'>Casting lights.</span>", R_DEBUG)
+/*	admin_notice("<span class='danger'>Casting lights.</span>", R_DEBUG)
 	for(var/thing in init_lights)
 		var/datum/D = thing
 		if(!QDELETED(D))
 			D:cast_light()
 			count++
 		CHECK_TICK
-	init_lights.Cut()
-	admin_notice("<span class='danger'>Cast [count] light\s</span>", R_DEBUG)
+	init_lights.Cut()(
+	admin_notice("<span class='danger'>Cast [count] light\s</span>", R_DEBUG)*/

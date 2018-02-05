@@ -56,7 +56,7 @@ datum/nano_item_lists
 /obj/item/device/uplink/nano_host()
 	return loc
 
-/obj/item/device/uplink/New()
+/obj/item/device/uplink/initialize()
 	..()
 	welcome = ticker.mode.uplink_welcome
 	uses = ticker.mode.uplink_uses

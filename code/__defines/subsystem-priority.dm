@@ -3,6 +3,7 @@
 #define SS_INIT_MACHINERY          10	// Machinery prune and powernet build.
 #define SS_INIT_WIRELESS            9	// Wireless pair queue flush.
 #define SS_INIT_AIR                 8	// Air setup and pre-bake.
+#define SS_INIT_LIGHT				7	// Lights are initialized here
 #define SS_INIT_ICON_UPDATE         5	// Icon update queue flush. Should run before overlays.
 #define SS_INIT_MISC                3	// Subsystems without an explicitly set initialization order start here.
 #define SS_INIT_LOBBY              -1	// Lobby timer starts here.
