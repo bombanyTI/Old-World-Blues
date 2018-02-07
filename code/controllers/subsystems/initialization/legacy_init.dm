@@ -83,12 +83,14 @@
 			CHECK_TICK
 
 	count = 0
-/*	admin_notice("<span class='danger'>Casting lights.</span>", R_DEBUG)
+	admin_notice("<span class='danger'>Casting lights.</span>", R_DEBUG)
 	for(var/thing in init_lights)
 		var/datum/D = thing
 		if(!QDELETED(D))
-			D:cast_light()
+			D:cast_light(1)
 			count++
 		CHECK_TICK
-	init_lights.Cut()(
-	admin_notice("<span class='danger'>Cast [count] light\s</span>", R_DEBUG)*/
+	init_lights.Cut()
+	lights_initialized = 1
+
+	admin_notice("<span class='danger'>Cast [count] light\s</span>", R_DEBUG)
