@@ -81,12 +81,12 @@ var/list/valid_secondary_effect_types = list(\
 	else if(icon_num == 10)
 		desc = "A large alien device, there appear to be some kind of vents in the side."
 		if(prob(50))
-			my_effect.trigger = rand(6,12)
+			my_effect.trigger = pick(TRIGGER_ENERGY, TRIGGER_HEAT, TRIGGER_COLD, TRIGGER_PHORON, TRIGGER_OXY, TRIGGER_CO2, TRIGGER_NITRO)
 	else if(icon_num == 11)
 		name = "sealed alien pod"
 		desc = "A strange alien device."
 		if(prob(25))
-			my_effect.trigger = rand(1,4)
+			my_effect.trigger = pick(TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
 
 /obj/machinery/artifact/process()
 
@@ -109,7 +109,7 @@ var/list/valid_secondary_effect_types = list(\
 	var/trigger_oxy = 0
 	var/trigger_co2 = 0
 	var/trigger_nitro = 0
-	if( (my_effect && my_effect.trigger >= TRIGGER_HEAT && my_effect.trigger <= TRIGGER_NITRO) || (secondary_effect && secondary_effect.trigger >= TRIGGER_HEAT && secondary_effect.trigger <= TRIGGER_NITRO))
+	if( (my_effect.trigger >= TRIGGER_HEAT && my_effect.trigger <= TRIGGER_NITRO) || (secondary_effect && secondary_effect.trigger >= TRIGGER_HEAT && secondary_effect.trigger <= TRIGGER_NITRO))
 		var/turf/T = get_turf(src)
 		var/datum/gas_mixture/env = T.return_air()
 		if(env)
@@ -210,7 +210,7 @@ var/list/valid_secondary_effect_types = list(\
 	src.add_fingerprint(user)
 
 	if(my_effect.trigger == TRIGGER_TOUCH)
-		user << "<b>You touch [src].<b>"
+		user << "<b>You touch [src].</b>"
 		my_effect.ToggleActivate()
 	else
 		user << "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
@@ -301,7 +301,7 @@ var/list/valid_secondary_effect_types = list(\
 			warn = 1
 
 		if(warn)
-			M << "<b>You accidentally touch [src].<b>"
+			M << "<b>You accidentally touch [src].</b>"
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)
