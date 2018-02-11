@@ -721,18 +721,6 @@ datum/design/item/weapon/eglaive
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_GLASS = 1000) //expensive, but no need for miners.
 	build_path = /obj/item/weapon/pickaxe/drill
 
-/datum/design/circuit/miningdrill
-	name = "mining drill head"
-	id = "mining drill head"
-	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
-	build_path = /obj/item/weapon/circuitboard/miningdrill
-
-/datum/design/circuit/miningdrillbrace
-	name = "mining drill brace"
-	id = "mining drill brace"
-	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
-	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
-
 /datum/design/item/weapon/mining/plasmacutter
 	id = "plasmacutter"
 	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)

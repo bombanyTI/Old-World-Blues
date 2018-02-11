@@ -109,7 +109,7 @@ var/list/valid_secondary_effect_types = list(\
 	var/trigger_oxy = 0
 	var/trigger_co2 = 0
 	var/trigger_nitro = 0
-	if( (my_effect.trigger >= TRIGGER_HEAT && my_effect.trigger <= TRIGGER_NITRO) || (secondary_effect && secondary_effect.trigger >= TRIGGER_HEAT && secondary_effect.trigger <= TRIGGER_NITRO))
+	if( (my_effect && my_effect.trigger >= TRIGGER_HEAT && my_effect.trigger <= TRIGGER_NITRO) || (secondary_effect && secondary_effect.trigger >= TRIGGER_HEAT && secondary_effect.trigger <= TRIGGER_NITRO))
 		var/turf/T = get_turf(src)
 		var/datum/gas_mixture/env = T.return_air()
 		if(env)
