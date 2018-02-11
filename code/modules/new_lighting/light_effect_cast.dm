@@ -244,8 +244,8 @@ var/light_power_multiplier = 5
 			I.icon_state = lwc_key
 			lighting_wall_cache[lwc_key] = new /mutable_appearance(I)
 
-		I.pixel_x = (world.icon_size * light_range) - (x_offset * world.icon_size)
-		I.pixel_y = (world.icon_size * light_range) - (y_offset * world.icon_size)
+		I.pixel_x = (world.icon_size * light_range) + (x_offset * world.icon_size)
+		I.pixel_y = (world.icon_size * light_range) + (y_offset * world.icon_size)
 
 		temp_appearance += I.appearance
 
