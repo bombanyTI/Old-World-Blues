@@ -1909,7 +1909,7 @@
 #include "code\modules\xenoarchaeology\effects\gasco2.dm"
 #include "code\modules\xenoarchaeology\effects\gasnitro.dm"
 #include "code\modules\xenoarchaeology\effects\gasoxy.dm"
-#include "code\modules\xenoarchaeology\effects\gasplasma.dm"
+#include "code\modules\xenoarchaeology\effects\gasphoron.dm"
 #include "code\modules\xenoarchaeology\effects\gassleeping.dm"
 #include "code\modules\xenoarchaeology\effects\goodfeeling.dm"
 #include "code\modules\xenoarchaeology\effects\heal.dm"

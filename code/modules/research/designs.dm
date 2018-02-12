@@ -359,6 +359,19 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/cell/hyper
 
 /////////////////////////////////////////
+//////////////// Tools///////////////////
+/////////////////////////////////////////
+
+/datum/design/item/experimental_welder
+	name = "Experimental Welding Tool"
+	desc = "A scientifically-enhanced welding tool that uses fuel-producing microbes to gradually replenish its fuel supply"
+	id = "experimental_welder"
+	reliability_base = 35
+	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
+	materials = list(MATERIAL_STEEL = 2000, MATERIAL_GOLD = 1000, MATERIAL_SILVER = 500)
+	build_path = /obj/item/weapon/weldingtool/experimental
+
+/////////////////////////////////////////
 ////////////Medical Tools////////////////
 /////////////////////////////////////////
 /datum/design/item/medical
@@ -583,6 +596,7 @@ other types of metals and chemistry for reagents).
 	name = "Portable shield diffuser"
 	desc = "A small handheld device designed to disrupt energy barriers"
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
+	materials = list(MATERIAL_STEEL = 5000, MATERIAL_URANIUM = 500)
 	build_path = /obj/item/weapon/shield_diffuser
 
 /datum/design/item/weapon/nuclear_gun
