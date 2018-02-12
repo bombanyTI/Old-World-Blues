@@ -229,7 +229,7 @@
 	return FALSE
 
 
-/obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/attackby(obj/item/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W,/obj/item/tk_grab))
 			return 0
@@ -274,7 +274,7 @@
 				if(!src) return
 				user << SPAN_NOTE("You [anchored? "un" : ""]secured \the [src]!")
 				anchored = !anchored
-	else if(istype(W) && !istype(W, /obj/item/weapon/weldingtool) && !istype(W, /obj/item/weapon/wrench))
+	else if(istype(W) && user.a_intent == "harm")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)

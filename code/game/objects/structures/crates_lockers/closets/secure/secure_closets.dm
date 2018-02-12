@@ -74,7 +74,7 @@
 	else
 		user << SPAN_NOTE("Access Denied")
 
-/obj/structure/closet/secure_closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/secure_closet/attackby(obj/item/W as obj, mob/user as mob)
 	if(!src.opened)
 		if(locked)
 			if(istype(W, /obj/item/device/multitool))
@@ -117,7 +117,7 @@
 					return
 		else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
 			return ..(W,user)
-		else if(istype(W) && !istype(W, /obj/item/weapon/weldingtool) && !istype(W, /obj/item/weapon/wrench))
+		else if(istype(W) && user.a_intent == "harm")
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			user.do_attack_animation(src)
 			playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
