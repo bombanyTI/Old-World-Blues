@@ -117,6 +117,16 @@
 					return
 		else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
 			return ..(W,user)
+		else if(istype(W) && !istype(W, /obj/item/weapon/weldingtool) && !istype(W, /obj/item/weapon/wrench))
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			user.do_attack_animation(src)
+			playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
+			if(W.force >= 10)
+				user.visible_message(SPAN_WARN("\The [user] attacks \the [src] with [W]!"))
+				damage(W.force)
+			else
+				user.visible_message(SPAN_WARN("\The [user] attacks \the [src] without any damage!"))
+
 		else
 			togglelock(user)
 	else
@@ -187,3 +197,10 @@
 	locked = 0
 	return ..()
 
+obj/structure/closet/secure_closet/damage(var/damage, mob/user)
+	health -= damage
+	if(health <= 0)
+		broked = 1
+		broken = 1
+		locked = 0
+		src.update_icon()
