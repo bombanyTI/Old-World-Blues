@@ -1906,7 +1906,7 @@
 "aKH" = (/obj/machinery/light_switch{pixel_y = 28},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor{icon_state = "vault"; dir = 6},/area/security/nuke_storage)
 "aKI" = (/obj/machinery/light/small{dir = 1},/obj/machinery/alarm{pixel_y = 23},/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/turf/simulated/floor{icon_state = "vault"},/area/security/nuke_storage)
 "aKJ" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_y = 24},/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/turf/simulated/floor{icon_state = "vault"; dir = 10},/area/security/nuke_storage)
-"aKK" = (/obj/machinery/computer/secure_data/detective_computer{screen_broken = null; screen_icon = null},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/nuke_storage)
+"aKK" = (/obj/machinery/computer/secure_data/detective_computer{screen_broken = "nodisplay"; screen_icon = "nodisplay"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/nuke_storage)
 "aKL" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor{icon_state = "dark"},/area/gateway)
 "aKM" = (/obj/machinery/gateway{dir = 10},/obj/effect/landmark{name = "JoinLateGateway"},/turf/simulated/floor{icon_state = "vault"; dir = 4},/area/gateway)
 "aKN" = (/obj/machinery/gateway,/obj/effect/landmark{name = "JoinLateGateway"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/gateway)
