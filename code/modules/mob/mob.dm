@@ -547,22 +547,14 @@
 			if(statpanel("Status"))
 				stat("Location:", "([x], [y], [z]) [loc]")
 				stat("CPU:","[world.cpu]")
-				stat("Tick Usage:", world.tick_usage)
 				stat("Instances:","[world.contents.len]")
 
-			if(statpanel("MC"))
-				if(Master)
-					Master.stat_entry()
+			if(statpanel("Processes"))
+				if(processScheduler && processScheduler.getIsRunning())
+					for(var/datum/controller/process/P in processScheduler.processes)
+						stat(P.getStatName(), P.getTickTime())
 				else
-					stat("Master Controller:", "ERROR")
-				if(Failsafe)
-					Failsafe.stat_entry()
-				else
-					stat("Failsafe Controller:", "ERROR")
-				if (Master)
-					stat(null, "- Subsystems -")
-					for(var/datum/controller/subsystem/SS in Master.subsystems)
-						SS.stat_entry()
+					stat("processScheduler is not running.")
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
@@ -929,7 +921,7 @@ mob/proc/yank_out_object()
 	else
 		return ..()
 
-/mob/verb/northfaceperm()
+/*/mob/verb/northfaceperm()
 	set hidden = 1
 	set_face_dir(NORTH)
 
@@ -944,12 +936,14 @@ mob/proc/yank_out_object()
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(WEST)
+*/
 
 /mob/proc/adjustEarDamage()
 	return
 
 /mob/proc/setEarDamage()
 	return
+
 
 //Throwing stuff
 
