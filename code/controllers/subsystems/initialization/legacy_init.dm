@@ -51,7 +51,7 @@
 
 	//Fuck this shit above, it doesn't initialize even a half, idk why
 
-	admin_notice("<span class='danger'>Initializing movable atom\s.</span>", R_DEBUG)
+	admin_notice("<span class='danger'>Initializing movable atoms.</span>", R_DEBUG)
 	for(var/atom/movable/object in world)
 		object.initialize()
 		count++
