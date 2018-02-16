@@ -9,7 +9,6 @@
 #define ARTIFACTSPAWNNUM_LOWER 6
 #define ARTIFACTSPAWNNUM_UPPER 12
 
-<<<<<<< HEAD
 /datum/controller/subsystem/legacy_init/proc/SetupXenoarch()
 	for(var/turf/simulated/mineral/M in world)
 		if(!M.density)
