@@ -237,6 +237,7 @@ var/light_power_multiplier = 5
 				blocking_dirs |= d
 
 		var/lwc_key = "[blocking_dirs]-[targ_dir]"
+		for (var/obj/machinery/door/D in target_turf) lwc_key = "fulltile"
 		I = lighting_wall_cache[lwc_key]
 		if (!I)
 			I = image('icons/planar_lighting/wall_lighting.dmi')

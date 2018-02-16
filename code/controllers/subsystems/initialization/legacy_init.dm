@@ -48,6 +48,11 @@
 		CHECK_TICK
 	init_atoms.Cut()
 
+
+	admin_notice("<span class='danger'>Initializing pipes (Maybe again)...</span>", R_DEBUG)
+	for(var/obj/machinery/atmospherics/pipe/pipe in world)
+		pipe.initialize()
+
 	admin_notice("<span class='danger'>Building pipe networks</span>", R_DEBUG)
 	var/count = 0
 	for(var/obj/machinery/atmospherics/machine in machines)

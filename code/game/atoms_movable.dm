@@ -14,12 +14,6 @@
 	var/moved_recently = 0
 	var/tmp/mob/pulledby = null
 
-
-/atom/movable/New()
-	..()
-	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
-		initialize()
-
 /*
 /atom/movable/Del()
 	if(isnull(gcDestroyed) && loc)
